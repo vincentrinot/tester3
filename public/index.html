@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Connect to Solana Wallet</title>
+    <style>
+      #address {
+        font-size: 2em;
+        text-align: center;
+        background: -webkit-linear-gradient(0deg, #f44336, #ff9800, #ffeb3b, #4caf50, #2196f3, #9c27b0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Connect to your Solana Wallet</h1>
+    <button id="connect-button">Connect to Wallet</button>
+    <div id="address"></div>
+    <script src="https://solana.com/solana.js"></script>
+    <script>
+      const connectButton = document.getElementById("connect-button");
+      const addressDiv = document.getElementById("address");
+
+      connectButton.addEventListener("click", async () => {
+        const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl("mainnet-beta"));
+        const { publicKey } = await solanaWeb3.connect();
+        addressDiv.innerText = publicKey.toBase58();
+      });
+    </script>
+  </body>
+</html>
